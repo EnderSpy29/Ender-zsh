@@ -1,4 +1,8 @@
-cat ~/.cache/wallust/sequences
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+command_exists wallust && cat ~/.cache/wallust/sequences
 
 fpath=($ZDOTDIR/themes $fpath)
 [[ -z $IS_TUI ]] && autoload -Uz prompt_Enderification; prompt_Enderification
@@ -10,13 +14,10 @@ alias ff="fastfetch"
 alias macchina="macchina -o host,kernel,window-manager,shell,terminal,uptime"
 
 alias dots="nvim ~/Endrland-Dots"
-alias hyprconf="nvim ~/.config/hypr"
-alias vimconf="nvim ~/.config/nvim"
 
 alias venv="source .venv/bin/activate"
 
 alias gcm="git commit -m"
-alias gaa="git add --all"
 
 alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
@@ -40,7 +41,7 @@ export PATH=$PATH:$GOBIN
 
 
 if [[ -z $IS_TUI ]]; then
-macchina
+command_exists macchina && macchina
 
 # zsh completion
 autoload -Uz compinit; compinit
