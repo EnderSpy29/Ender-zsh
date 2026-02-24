@@ -1,8 +1,4 @@
-command_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
-
-command_exists wallust && cat ~/.cache/wallust/sequences
+[[ -a "/usr/bin/wallust" ]] && cat ~/.cache/wallust/sequences
 
 fpath=($ZDOTDIR/themes $fpath)
 [[ -z $IS_TUI ]] && autoload -Uz prompt_Enderification; prompt_Enderification
@@ -41,7 +37,7 @@ export PATH=$PATH:$GOBIN
 
 
 if [[ -z $IS_TUI ]]; then
-command_exists macchina && macchina
+  [[ -a "/usr/bin/macchina" ]] && macchina
 
 # zsh completion
 autoload -Uz compinit; compinit
